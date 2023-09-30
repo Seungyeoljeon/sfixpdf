@@ -1,4 +1,3 @@
-
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
@@ -15,6 +14,9 @@ from langchain.chains import RetrievalQA
 import streamlit
 import tempfile
 import os
+from streamlit_extras.buy_me_a_coffee import button
+
+button(username="jocoding", floating=True, width=221)
 
 #제목
 streamlit.title("ChatPDF")
