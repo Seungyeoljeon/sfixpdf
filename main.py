@@ -15,7 +15,7 @@ import tempfile
 import os
 from streamlit_extras.buy_me_a_coffee import button
 
-button(username="seungyeol", floating=True, width=221)
+button(username="sfix", floating=True, width=221)
 
 #제목
 streamlit.title("chatfile")
