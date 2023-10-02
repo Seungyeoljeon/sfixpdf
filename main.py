@@ -40,30 +40,11 @@ def pdf_to_document(uploaded_file):
         loader = PyPDFLoader(temp_filepath)
         pages = loader.load_and_split()
         return pages
-    #TXT 파일의 경우
-    elif file_extension == '.txt':
-        with tempfile.NamedTemporaryFile(suffix=".txt", mode="w+") as temp_file:
-            temp_file.write(uploaded_file.getvalue().decode("utf-8"))
-            temp_file.flush()
-            return pdf_to_document(temp_file)
 
     else:
         return None
-        raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
+        raise ValueError("Unsupported file type. Only PDFs are supported.")
     
-def split_txt(txt_file):
-    with open(txt_file, "r") as f:
-        pages = []
-        for line in f:
-            pages.append({"page_content": line})
-    return pages
-
-# 업로드된 파일이 TXT 파일인 경우
-if uploaded_file is not None and file_extension == '.txt':
-    pages = split_txt(uploaded_file)
-else:
-    pages = pdf_to_document(uploaded_file)
-
 
 #업로드시 동작 코드
 if uploaded_file is not None:
@@ -75,7 +56,7 @@ if uploaded_file is not None:
         pages = None
         
 if pages is None:
-    streamlit.warning("Please upload a valid PDF or TXT file.")
+    streamlit.warning("Please upload a valid PDF file.")
 else:
         
     #Split
