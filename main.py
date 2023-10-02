@@ -29,8 +29,11 @@ streamlit.write("___")
 
 def pdf_to_document(uploaded_file):
     # 파일 확장자 확인
-    file_extension = os.path.splitext(uploaded_file.name)[1].lower()
-    
+    try:
+        file_extension = os.path.splitext(uploaded_file.name)[1].lower()
+    except AttributeError:
+        # 파일이 존재하지 않거나 파일이 비어 있는 경우
+        return None
     # PDF 파일의 경우
     if file_extension == '.pdf':
         temp_dir = tempfile.TemporaryDirectory()
@@ -50,7 +53,7 @@ def pdf_to_document(uploaded_file):
     else:
         return None
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
-
+    
 def split_txt(txt_file):
     with open(txt_file, "r") as f:
         pages = []
