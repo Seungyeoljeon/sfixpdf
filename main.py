@@ -48,6 +48,7 @@ def pdf_to_document(uploaded_file):
             return pdf_to_document(temp_file)
 
     else:
+        return pages = None
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
 def split_txt(txt_file):
