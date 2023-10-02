@@ -12,6 +12,7 @@ from langchain.chains import RetrievalQA
 import streamlit
 import tempfile
 import os
+import TextLoader
 from streamlit_extras.buy_me_a_coffee import button
 
 button(username="jocoding", floating=True, width=221)
@@ -24,23 +25,33 @@ streamlit.write("___")
 uploaded_file = streamlit.file_uploader("Choose a file")
 streamlit.write("___")
 
-def pdf_to_document(uploaded_file):
-    temp_dir = tempfile.TemporaryDirectory()
-    temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
-    with open(temp_filepath,"wb") as f:
-        f.write(uploaded_file.getvalue())
-    loader = PyPDFLoader(temp_filepath)
-    pages = loader.load_and_split()
-    return pages
+def file_to_document(uploaded_file):
+    # PDF 파일의 경우
+    if file_extension == '.pdf':
+        temp_dir = tempfile.TemporaryDirectory()
+        temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
+        with open(temp_filepath,"wb") as f:
+            f.write(uploaded_file.getvalue())
+        loader = PyPDFLoader(temp_filepath)
+        pages = loader.load_and_split()
+        return pages
 
+    # TXT 파일의 경우
+    elif file_extension == '.txt':
+        temp_dir = tempfile.TemporaryDirectory()
+        temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
+        with open(temp_filepath,"wb") as f:
+            f.write(uploaded_file.getvalue())
+        loader = TextLoader(temp_filepath)
+        pages = loader.load_and_split()
+        return pages
+
+    else:
+        raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
 #업로드시 동작 코드
 if uploaded_file is not None:
-    pages = pdf_to_document(uploaded_file)
-
-    #Loader
-    # loader = PyPDFLoader("copyrightqa.pdf")
-    # pages = loader.load_and_split()
+    pages = file_to_document(uploaded_file)
 
     #Split
     text_splitter = RecursiveCharacterTextSplitter(
