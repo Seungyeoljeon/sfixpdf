@@ -86,9 +86,6 @@ if uploaded_file is not None:
     streamlit.header("pdf에게 질문하기")
     question = streamlit.text_input('질문입력하세요.')
 
-    streamlit.write(pages)
-    streamlit.write(texts)
-
     
     #question
     if streamlit.button('질문하기'):
