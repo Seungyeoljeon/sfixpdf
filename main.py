@@ -44,8 +44,8 @@ def pdf_to_document(uploaded_file):
             # TXT 내용을 읽어서 리스트로 반환
             content = uploaded_file.getvalue().decode('utf-8')
             return [content]
-        else:
-            raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
+    else:
+        raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
 
 #업로드시 동작 코드
