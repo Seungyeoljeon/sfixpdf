@@ -22,8 +22,10 @@ streamlit.title("ChatPDF")
 streamlit.write("___")
 
 #uploader
-uploaded_file = streamlit.file_uploader("Choose a file")
+uploaded_file = streamlit.file_uploader("PDF 파일 업로드 해주세요",type=['pdf'])
 streamlit.write("___")
+
+file_extension = os.path.splitext(uploaded_file.name)[1].lower()
 
 def file_to_document(uploaded_file):
     # PDF 파일의 경우
