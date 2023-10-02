@@ -42,8 +42,14 @@ def pdf_to_document(uploaded_file):
         
     elif file_extension == '.txt':
         # TXT 내용을 줄별로 분리하여 리스트로 반환
-        content = uploaded_file.getvalue().decode('utf-8')
-        return [{"page_content": line} for line in content.splitlines()]
+        temp_dir = tempfile.TemporaryDirectory()
+        temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
+        with open(temp_filepath, "wb") as f:
+            f.write(uploaded_file.getvalue())
+        pages = txt_loader(temp_filepath)
+        pages = loader.load_and_split()
+        return pages
+        
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
