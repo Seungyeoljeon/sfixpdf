@@ -43,13 +43,11 @@ def pdf_to_document(uploaded_file):
     elif file_extension == '.txt':
         # TXT 내용을 줄별로 분리하여 리스트로 반환
         content = uploaded_file.getvalue().decode('utf-8')
-        return [{"page_content": content}]
+        return [{"page_content": line} for line in content.splitlines()]
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
 pages = None
-
-streamlit.write(pdf_to_document)
 
 
 #업로드시 동작 코드
@@ -99,3 +97,6 @@ else:
             qa_chain = RetrievalQA.from_chain_type(llm,retriever=db.as_retriever())
             result = qa_chain({"query": question})
             streamlit.write(result["result"])
+
+
+print(pages)
