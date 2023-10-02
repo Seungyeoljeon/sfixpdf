@@ -123,3 +123,4 @@ else:
 
 
 print(pages)
+streamlit.write(pages)
