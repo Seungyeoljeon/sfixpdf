@@ -36,6 +36,16 @@ def file_to_document(uploaded_file):
         pages = loader.load_and_split()
         return pages
 
+    # TXT 파일의 경우
+    elif file_extension == '.txt':
+        temp_dir = tempfile.TemporaryDirectory()
+        temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
+        with open(temp_filepath,"wb") as f:
+            f.write(uploaded_file.getvalue())
+        loader = TextLoader(temp_filepath)
+        pages = loader.load_and_split()
+        return pages
+
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
