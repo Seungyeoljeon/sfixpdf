@@ -29,11 +29,7 @@ streamlit.write("___")
 
 def pdf_to_document(uploaded_file):
     # 파일 확장자 확인
-    try:
-        file_extension = os.path.splitext(uploaded_file.name)[1].lower()
-    except AttributeError:
-        # 파일이 존재하지 않거나 파일이 비어 있는 경우
-        return None
+    file_extension = os.path.splitext(uploaded_file.name)[1].lower()
         
     # PDF 파일의 경우
     if file_extension == '.pdf':
