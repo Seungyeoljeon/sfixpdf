@@ -62,7 +62,7 @@ if uploaded_file is not None:
     #Split
     text_splitter = RecursiveCharacterTextSplitter(
     # Set a really small chunk size, just to show.
-        chunk_size = 300,
+        chunk_size = 100,
         chunk_overlap  = 20,
         length_function = len,
         is_separator_regex = False,
