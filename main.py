@@ -18,7 +18,7 @@ from streamlit_extras.buy_me_a_coffee import button
 button(username="jocoding", floating=True, width=221)
 
 #제목
-streamlit.title("ChatPDF")
+streamlit.title("chatfile")
 streamlit.write("___")
 
 #uploader
@@ -83,7 +83,7 @@ if uploaded_file is not None:
     # )
 
     #input
-    streamlit.header("pdf에게 질문하기")
+    streamlit.header("파일로 질문하기")
     question = streamlit.text_input('질문입력하세요.')
 
     
