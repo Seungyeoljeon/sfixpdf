@@ -26,24 +26,6 @@ streamlit.write("___")
 uploaded_file = streamlit.file_uploader("Choose a file")
 streamlit.write("___")
 
-#txt로더
-
-def txt_loader(txt_filepath):
-  """Loads a TXT file and splits it into pages.
-
-  Args:
-    txt_filepath: The path to the TXT file.
-
-  Returns:
-    A list of pages, where each page is a dictionary with the following keys:
-      * `page_content`: The content of the page.
-  """
-
-  pages = []
-  with open(txt_filepath, "r") as f:
-    for line in f:
-      pages.append({"page_content": line})
-  return pages
 
 def pdf_to_document(uploaded_file):
     # 파일 확장자 확인
@@ -59,13 +41,6 @@ def pdf_to_document(uploaded_file):
         pages = loader.load_and_split()
         return pages
         
-    elif file_extension == '.txt':
-        temp_dir = tempfile.TemporaryDirectory()
-        temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
-        with open(temp_filepath, "wb") as f:
-          f.write(uploaded_file.getvalue())
-        pages = txt_loader(temp_filepath)
-        return pages
         
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
@@ -95,7 +70,7 @@ else:
         is_separator_regex = False,
     )
     texts = text_splitter.split_documents(pages)
-    
+      
     #Embedding
     
     embeddings_model = OpenAIEmbeddings()
