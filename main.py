@@ -3,7 +3,7 @@ import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 #import
-from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import PyPDFLoader import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -12,7 +12,6 @@ from langchain.chains import RetrievalQA
 import streamlit
 import tempfile
 import os
-import TextLoader
 from streamlit_extras.buy_me_a_coffee import button
 
 button(username="jocoding", floating=True, width=221)
@@ -45,7 +44,7 @@ def file_to_document(uploaded_file):
         loader = TextLoader(temp_filepath)
         pages = loader.load_and_split()
         return pages
-
+        
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
