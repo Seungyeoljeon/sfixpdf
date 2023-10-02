@@ -85,6 +85,7 @@ if uploaded_file is not None:
     #input
     streamlit.header("파일로 질문하기")
     question = streamlit.text_input('질문입력하세요.')
+    streamlit.write(texts)
 
     
     #question
