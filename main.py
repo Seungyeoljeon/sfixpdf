@@ -86,9 +86,13 @@ if uploaded_file is not None:
     streamlit.header("pdf에게 질문하기")
     question = streamlit.text_input('질문입력하세요.')
 
+    streamlit.write(pages)
+    streamlit.write(texts)
+
+    
     #question
     if streamlit.button('질문하기'):
-        with streamlit.spinner('Wait for it...'):
+        with streamlit.spinner('잠시만요...'):
             llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
             qa_chain = RetrievalQA.from_chain_type(llm,retriever=db.as_retriever())
             result = qa_chain({"query": question})
