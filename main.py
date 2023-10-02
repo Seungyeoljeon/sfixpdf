@@ -34,6 +34,7 @@ def pdf_to_document(uploaded_file):
     except AttributeError:
         # 파일이 존재하지 않거나 파일이 비어 있는 경우
         return None
+        
     # PDF 파일의 경우
     if file_extension == '.pdf':
         temp_dir = tempfile.TemporaryDirectory()
