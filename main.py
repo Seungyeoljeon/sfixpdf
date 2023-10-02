@@ -43,7 +43,7 @@ def pdf_to_document(uploaded_file):
     elif file_extension == '.txt':
             # TXT 내용을 줄별로 분리하여 리스트로 반환
             content = uploaded_file.getvalue().decode('utf-8')
-            return content.splitlines()
+            return [{"page_content": content}]
     else:
         raise ValueError("Unsupported file type. Only PDF and TXT are supported.")
 
