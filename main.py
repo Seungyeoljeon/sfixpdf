@@ -26,6 +26,25 @@ streamlit.write("___")
 uploaded_file = streamlit.file_uploader("Choose a file")
 streamlit.write("___")
 
+#txt로더
+
+def txt_loader(txt_filepath):
+  """Loads a TXT file and splits it into pages.
+
+  Args:
+    txt_filepath: The path to the TXT file.
+
+  Returns:
+    A list of pages, where each page is a dictionary with the following keys:
+      * `page_content`: The content of the page.
+  """
+
+  pages = []
+  with open(txt_filepath, "r") as f:
+    for line in f:
+      pages.append({"page_content": line})
+  return pages
+
 def pdf_to_document(uploaded_file):
     # 파일 확장자 확인
     file_extension = os.path.splitext(uploaded_file.name)[1].lower()
@@ -41,13 +60,11 @@ def pdf_to_document(uploaded_file):
         return pages
         
     elif file_extension == '.txt':
-        # TXT 내용을 줄별로 분리하여 리스트로 반환
         temp_dir = tempfile.TemporaryDirectory()
         temp_filepath = os.path.join(temp_dir.name, uploaded_file.name)
         with open(temp_filepath, "wb") as f:
-            f.write(uploaded_file.getvalue())
+          f.write(uploaded_file.getvalue())
         pages = txt_loader(temp_filepath)
-        pages = loader.load_and_split()
         return pages
         
     else:
