@@ -22,7 +22,7 @@ streamlit.title("ChatPDF")
 streamlit.write("___")
 
 #uploader
-uploaded_file = streamlit.file_uploader("PDF 파일 업로드 해주세요",type=['pdf'])
+uploaded_file = streamlit.file_uploader("PDF 또는 TXT 파일 업로드 해주세요",type=['pdf', 'txt'])
 streamlit.write("___")
 
 file_extension = os.path.splitext(uploaded_file.name)[1].lower()
