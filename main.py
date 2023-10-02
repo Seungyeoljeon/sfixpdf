@@ -49,6 +49,9 @@ def pdf_to_document(uploaded_file):
 
 pages = None
 
+streamlit.write(pdf_to_document)
+
+
 #업로드시 동작 코드
 if uploaded_file is not None:
     try:
@@ -61,9 +64,6 @@ if uploaded_file is not None:
 if pages is None:
     streamlit.warning("Please upload a valid PDF or TXT file.")
 else:
-    #Loader
-    # loader = PyPDFLoader("copyrightqa.pdf")
-    # pages = loader.load_and_split()
         
     #Split
     text_splitter = RecursiveCharacterTextSplitter(
