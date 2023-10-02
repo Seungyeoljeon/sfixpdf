@@ -25,7 +25,11 @@ streamlit.write("___")
 uploaded_file = streamlit.file_uploader("PDF 또는 TXT 파일 업로드 해주세요",type=['pdf', 'txt'])
 streamlit.write("___")
 
-file_extension = os.path.splitext(uploaded_file.name)[1].lower()
+# Before the function definition
+if uploaded_file is not None:
+    file_extension = os.path.splitext(uploaded_file.name)[1].lower()
+else:
+    file_extension = ""
 
 def file_to_document(uploaded_file):
     # PDF 파일의 경우
