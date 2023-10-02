@@ -54,9 +54,7 @@ if uploaded_file is not None:
     except ValueError as e:
         streamlit.error(str(e))
         pages = None
-        
-if pages is None:
-    streamlit.warning("Please upload a valid PDF file.")
+
 else:
         
     #Split
